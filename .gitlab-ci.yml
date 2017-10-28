@@ -16,11 +16,11 @@ before_script:
 build:
   stage: build
   script:
-    - docker build --pull -t $CONTAINER_TEST_IMAGE .
-    - docker push $CONTAINER_TEST_IMAGE
+    - docker build --pull -t $CONTAINER_IMAGE .
+    - docker push $CONTAINER_IMAGE
 
 docker-compose-version:
   stage: test
   script:
-    - docker pull $CONTAINER_TEST_IMAGE
-    - docker run $CONTAINER_TEST_IMAGE docker-compose --version
+    - docker pull $CONTAINER_IMAGE
+    - docker run $CONTAINER_IMAGE docker-compose --version

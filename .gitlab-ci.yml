@@ -8,11 +8,19 @@ variables:
 services:
 - docker:dind
 
-before_script:
-- docker info
+stages:
+- build
+- test
 
 build:
   stage: build
+  before_script:
+  - docker info
   script:
   - docker build -t dockercomposegitlabci .
+  - docker ps -a
+
+test:
+  stage: test
+  script:
   - docker run dockercomposegitlabci docker-compose --version

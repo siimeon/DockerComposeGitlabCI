@@ -15,8 +15,4 @@ build:
   stage: build
   script:
   - docker build -t dockercomposegitlabci .
-
-test:
-  stage: test
-  script:
   - docker run dockercomposegitlabci docker-compose --version

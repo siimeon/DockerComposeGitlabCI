@@ -1,10 +1,4 @@
 image: docker:latest
-
-# When using dind, it's wise to use the overlayfs driver for
-# improved performance.
-variables:
-  DOCKER_DRIVER: overlay2
-
 services:
 - docker:dind
 
@@ -12,15 +6,21 @@ stages:
 - build
 - test
 
+variables:
+  DOCKER_DRIVER: overlay2
+  CONTAINER_IMAGE: registry.gitlab.com/siimeon/dockercomposegitlabci:$CI_COMMIT_REF_NAME
+
+before_script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+
 build:
   stage: build
-  before_script:
-  - docker info
   script:
-  - docker build -t dockercomposegitlabci .
-  - docker ps -a
+    - docker build --pull -t $CONTAINER_TEST_IMAGE .
+    - docker push $CONTAINER_TEST_IMAGE
 
-test:
+docker-compose-version:
   stage: test
   script:
-  - docker run dockercomposegitlabci docker-compose --version
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker run $CONTAINER_TEST_IMAGE docker-compose --version

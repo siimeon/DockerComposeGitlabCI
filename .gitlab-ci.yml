@@ -1,6 +1,6 @@
 image: docker:latest
 services:
-- registry.gitlab.com/siimeon/dockercomposegitlabci:17-dind
+- docker:dind
 
 stages:
 - build

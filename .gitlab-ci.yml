@@ -3,6 +3,7 @@ services:
 - docker:dind
 
 stages:
+- info
 - build
 - test
 
@@ -12,6 +13,11 @@ variables:
 
 before_script:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+
+docker-info:
+  stage: info
+  script:
+    - docker info
 
 build:
   stage: build

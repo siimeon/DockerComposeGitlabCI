@@ -1,6 +1,7 @@
 image: docker:latest
 services:
-- docker:dind
+- name: docker:dind
+  alias: docker
 
 stages:
 - info

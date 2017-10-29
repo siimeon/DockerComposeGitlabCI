@@ -1,4 +1,6 @@
 image: docker:latest
+services:
+- siimeon/dockercomposegitlabci:17-dind
 
 stages:
 - build

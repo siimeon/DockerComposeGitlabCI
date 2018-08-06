@@ -1,8 +1,9 @@
-FROM docker:17
+FROM docker:18.06
 
 RUN apk add --no-cache py-pip
 RUN apk add --no-cache curl
 RUN apk add --no-cache jq
+RUN apk add --no-cache bash
 RUN pip install docker-compose
 RUN pip install awscli
 RUN curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
